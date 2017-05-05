@@ -49,6 +49,7 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
 
         PDasar = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         TFCari = new javax.swing.JTextField();
         CBJenisTranspotasi = new javax.swing.JComboBox<>();
@@ -67,19 +68,33 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel3.setText("Cari Tiket");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(423, 423, 423)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(102, 204, 255));
 
+        TFCari.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                TFCariCaretUpdate(evt);
+            }
+        });
         TFCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TFCariKeyTyped(evt);
@@ -101,36 +116,49 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
 
         TPencarianTiket.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "NO", "ARMADA", "Tanggal Berangkat", "Jam Berangkat", "Harga"
+                "NO", "ARMADA", "From", "To", "Tanggal Berangkat", "Jam Berangkat", "Harga"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        TPencarianTiket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TPencarianTiketMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TPencarianTiket);
 
         CBUdara.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lion Air", "Batik Air", "Garuda", "Sriwijaya Air", "Air Asia", "" }));
+        CBUdara.setEnabled(false);
 
         CBDarat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kangoro", "Nusantara", "Pahala Kencana", "Akas", "Rosalia Indah", "effisiensi" }));
+        CBDarat.setEnabled(false);
 
         CBLaut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Wilis", "Tidar", "Leuser", "Labodar", "Kelimutu", "Lawit" }));
+        CBLaut.setEnabled(false);
+        CBLaut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBLautActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Tanggal");
 
@@ -162,15 +190,15 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(CBUdara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CBDarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(CBDarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CBUdara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(CBLaut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(DCTanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                            .addComponent(DCTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,14 +216,14 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CBUdara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CBDarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CBLaut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(CBLaut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CBUdara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
                 .addComponent(LHarga)
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PDasarLayout = new javax.swing.GroupLayout(PDasar);
@@ -237,6 +265,28 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
 
     private void CBJenisTranspotasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBJenisTranspotasiActionPerformed
         // TODO add your handling code here:
+        if (CBJenisTranspotasi.getSelectedItem().equals("Darat")) {
+            CBDarat.setEnabled(true);
+            CBUdara.setEnabled(false);
+            CBLaut.setEnabled(false);
+        }
+        else if (CBJenisTranspotasi.getSelectedItem().equals("Udara")) {
+            CBUdara.setEnabled(true);
+            CBDarat.setEnabled(false);
+            CBLaut.setEnabled(false);
+        }
+        else if (CBJenisTranspotasi.getSelectedItem().equals("Laut")) {
+            CBLaut.setEnabled(true);
+            CBUdara.setEnabled(false);
+            CBDarat.setEnabled(false);
+            
+        }
+        else  {
+            CBLaut.setEnabled(false);
+            CBUdara.setEnabled(false);
+            CBDarat.setEnabled(false);
+            
+        }
     }//GEN-LAST:event_CBJenisTranspotasiActionPerformed
 
     private void TFCariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFCariKeyTyped
@@ -248,6 +298,21 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
         // TODO add your handling code here:
         LHarga.setText(String.valueOf("Rp. "+SHarga.getValue()+"0.000"));
     }//GEN-LAST:event_SHargaStateChanged
+
+    private void TFCariCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_TFCariCaretUpdate
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_TFCariCaretUpdate
+
+    private void TPencarianTiketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPencarianTiketMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_TPencarianTiketMouseClicked
+
+    private void CBLautActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBLautActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBLautActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,6 +362,7 @@ public class FORMPEMESANANTIKET extends javax.swing.JFrame {
     private javax.swing.JTable TPencarianTiket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
